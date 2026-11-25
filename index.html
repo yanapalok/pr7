@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>McDonald's: навчальна демонстрація</title>
+  <meta name="description" content="Навчальний макет сторінки McDonald's: меню з пошуком, історія, форма відгуку та UI-Kit.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="tests.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">McDonald's <span class="brand-note">демо-сторінка</span></div>
+
+    <div class="header-tools">
+      <div class="session" role="timer" aria-label="Час сесії">
+        <span>Ви на сторінці вже</span>
+        <span class="session-time" id="session-time">00:00</span>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" id="theme-toggle" aria-pressed="false">Темна тема</button>
+    </div>
+
+    <nav class="nav" id="nav" aria-label="Основна навігація">
+      <a href="#menu" class="nav-link" data-route="menu">Меню</a>
+      <a href="#about" class="nav-link" data-route="about">Про проєкт</a>
+      <a href="#feedback" class="nav-link" data-route="feedback">Зворотний зв'язок</a>
+      <a href="#ui-kit" class="nav-link" data-route="ui-kit">UI-Kit</a>
+    </nav>
+  </header>
+
+  <main>
+    
+    <section id="menu" class="page" data-title="Меню">
+      <h1>Що замовимо сьогодні?</h1>
+      <p class="lead">Кілька популярних позицій. Ціни умовні, це навчальний макет.</p>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="search">Пошук за назвою</label>
+          <input type="search" id="search" class="input" autocomplete="off">
+        </div>
+        <button type="button" class="btn" id="refresh">Оновити</button>
+      </div>
+
+      <div class="switcher" role="group" aria-label="Перемикач станів для тестування">
+        <span class="switcher-label">Тест станів:</span>
+        <button type="button" class="btn btn-secondary btn-sm" data-set-state="content">Дані</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-set-state="loading">Завантаження</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-set-state="empty">Порожній</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-set-state="error">Помилка</button>
+      </div>
+
+      <div class="states" aria-live="polite">
+        <div data-state="loading" class="is-hidden" aria-busy="true">
+          <div class="skeleton-list" aria-hidden="true">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+          </div>
+          <p class="note">Завантажуємо меню…</p>
+        </div>
+
+        <div data-state="content">
+          <ul class="catalog" id="catalog"></ul>
+        </div>
+
+        <div data-state="empty" class="state-box is-hidden">
+          <svg class="state-icon" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 36h56l-6 40a6 6 0 0 1-6 5H32a6 6 0 0 1-6-5z"/>
+            <path d="M34 36c0-12 6-20 14-20s14 8 14 20"/>
+            <path d="M40 54l16 16M56 54L40 70"/>
+          </svg>
+          <h2>Нічого не знайдено</h2>
+          <p id="empty-text">Список порожній.</p>
+          <button type="button" class="btn" id="reset">Скинути й показати все</button>
+        </div>
+
+        <div data-state="error" class="state-box is-error is-hidden" role="alert">
+          <svg class="state-icon" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M48 14 86 80H10z"/>
+            <path d="M48 40v20M48 69v1"/>
+          </svg>
+          <h2>Не вдалося завантажити меню</h2>
+          <p>Код 503: сервер тимчасово недоступний. Перевірте з'єднання й повторіть спробу.</p>
+          <button type="button" class="btn" id="retry">Повторити спробу</button>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="about" class="page is-hidden" data-title="Про проєкт">
+      <h1>Історія McDonald's</h1>
+      <p class="lead">Від невеликого придорожнього ресторану до однієї з найвідоміших мереж швидкого харчування у світі.</p>
+      <p>Усе почалося у 1940 році, коли брати Річард і Моріс Макдональди відкрили ресторан у Каліфорнії. Згодом вони придумали «швидку систему обслуговування»: обмежене меню, стандартні рецепти й швидка видача замовлень.</p>
+      <p>У 1955 році підприємець Рей Крок відкрив перший ресторан за франшизою, і мережа почала швидко рости. Біг Мак з'явився у 1967 році та став візитівкою компанії.</p>
+      <p>В Україні перший ресторан відкрився в Києві у 1997 році. Сьогодні в країні їх десятки, а меню поєднує класичні позиції та локальні новинки.</p>
+      <p class="note">Ця сторінка є навчальним макетом і не пов'язана з компанією McDonald's.</p>
+    </section>
+
+    
+    <section id="feedback" class="page is-hidden" data-title="Зворотний зв'язок">
+      <h1>Залиште відгук</h1>
+      <p class="lead">Розкажіть, що сподобалось, а що варто покращити.</p>
+      <form id="feedback-form" class="form" novalidate>
+        <div class="field">
+          <label for="name">Ім'я</label>
+          <input type="text" id="name" name="name" class="input" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Електронна пошта</label>
+          <input type="email" id="email" name="email" class="input" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="message">Відгук</label>
+          <textarea id="message" name="message" class="input" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn">Надіслати</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </section>
+
+    
+    <section id="ui-kit" class="page is-hidden" data-title="UI-Kit">
+      <h1>UI-Kit</h1>
+      <p class="lead">Компоненти у станах Default, Hover, Focus, Disabled. Тему можна змінити кнопкою в шапці: класи компонентів при цьому не змінюються.</p>
+
+      <h3>Кнопка Primary</h3>
+      <div class="kit-row">
+        <button type="button" class="btn">Default</button>
+        <button type="button" class="btn is-hover">Hover</button>
+        <button type="button" class="btn is-focus">Focus</button>
+        <button type="button" class="btn" disabled>Disabled</button>
+      </div>
+
+      <h3>Кнопка Secondary</h3>
+      <div class="kit-row">
+        <button type="button" class="btn btn-secondary">Default</button>
+        <button type="button" class="btn btn-secondary is-hover">Hover</button>
+        <button type="button" class="btn btn-secondary is-focus">Focus</button>
+        <button type="button" class="btn btn-secondary" disabled>Disabled</button>
+      </div>
+
+      <h3>Кнопка Danger</h3>
+      <div class="kit-row">
+        <button type="button" class="btn btn-danger">Default</button>
+        <button type="button" class="btn btn-danger is-hover">Hover</button>
+        <button type="button" class="btn btn-danger is-focus">Focus</button>
+        <button type="button" class="btn btn-danger" disabled>Disabled</button>
+      </div>
+
+      <h3>Текстові поля</h3>
+      <div class="kit-grid">
+        <div class="field">
+          <label for="kit-default">Default</label>
+          <input type="text" id="kit-default" class="input" value="Біг Мак">
+        </div>
+        <div class="field">
+          <label for="kit-focus">Focus</label>
+          <input type="text" id="kit-focus" class="input is-focus" value="Чізбургер">
+        </div>
+        <div class="field">
+          <label for="kit-disabled">Disabled</label>
+          <input type="text" id="kit-disabled" class="input" value="Недоступно" disabled>
+        </div>
+        <div class="field">
+          <label for="kit-error">Error</label>
+          <input type="email" id="kit-error" class="input is-invalid" value="не-пошта" aria-invalid="true" aria-describedby="kit-error-msg">
+          <p class="field-error" id="kit-error-msg">Вкажіть коректну адресу пошти.</p>
+        </div>
+      </div>
+
+      <h3>Картка контенту</h3>
+      <div class="kit-card">
+        <div class="card">
+          <div>
+            <h2>Макфлурі</h2>
+            <p>Морозиво з наповнювачем на вибір.</p>
+          </div>
+          <span class="price">70 ₴</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
